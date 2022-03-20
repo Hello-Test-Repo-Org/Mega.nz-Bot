@@ -1,10 +1,11 @@
-FROM debian:latest
+FROM archlinux:latest
 
-RUN apt update && apt upgrade -y
-RUN apt install git python3-pip ffmpeg megatools -y
+RUN pacman -Syyu --noconfirm
+RUN pacman -S --noconfirm git python-pip ffmpeg megatools gcc
 RUN pip3 install -U pip
 RUN mkdir /app/
 WORKDIR /app/
-RUN git clone https://github.com/Itz-fork/Mega.nz-Bot.git /app
+COPY . /app/
+RUN pip3 install -U setuptools
 RUN pip3 install -U -r requirements.txt
 CMD bash startup.sh
