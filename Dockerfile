@@ -1,11 +1,11 @@
-FROM archlinux:latest
+FROM ubuntu:latest
 
-RUN pacman -Syyu --noconfirm
-RUN pacman -S --noconfirm git python-pip ffmpeg megatools gcc
+RUN apt update && apt upgrade -y
+RUN apt install git python3-pip ffmpeg megatools -y
+RUN apt -qq install -y --no-install-recommends megatools
 RUN pip3 install -U pip
 RUN mkdir /app/
 WORKDIR /app/
-COPY . /app/
-RUN pip3 install -U setuptools
+RUN git clone https://github.com/Itz-fork/Mega.nz-Bot.git /app
 RUN pip3 install -U -r requirements.txt
 CMD bash startup.sh
