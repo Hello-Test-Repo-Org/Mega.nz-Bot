@@ -1,5 +1,7 @@
 FROM ubuntu:latest
 
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt update && apt upgrade -y
 RUN apt install git python3-pip ffmpeg megatools -y
 RUN apt -qq install -y --no-install-recommends megatools
